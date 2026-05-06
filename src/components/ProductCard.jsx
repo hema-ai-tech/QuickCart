@@ -1,6 +1,15 @@
 import '../styles/ProductCard.css';
 
-function ProductCard({ product }) {
+function ProductCard({ product, onAddToCart }) {
+  const handleAddToCart = () => {
+    console.log('Add to cart clicked:', product);
+    if (typeof onAddToCart === 'function') {
+      onAddToCart(product);
+    } else {
+      console.warn('onAddToCart is not defined for ProductCard', product);
+    }
+  };
+
   return (
     <div className="product-card">
       <div className="product-image-container">
@@ -17,6 +26,12 @@ function ProductCard({ product }) {
           <span className="product-price">${product.price}</span>
           <span className="product-category">{product.category}</span>
         </div>
+        <button 
+          className="add-to-cart-btn"
+          onClick={handleAddToCart}
+        >
+          Add to Cart
+        </button>
       </div>
     </div>
   );
